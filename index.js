@@ -1,5 +1,7 @@
 //https://wttr.in/chicago?format=j1
-
+//sort through CSS - figure out the overflow feature
+//figure out how to wrap the event in a function
+//and add the event to the bullet
 
 //grab the input value from the text box
 
@@ -28,9 +30,16 @@ form.addEventListener("submit", (event) => {
             if (initialBullet) {
                 initialBullet.remove()
             }
+
+            //remove the location
+            const locationParagraph = document.querySelector("main span");
+            if (locationParagraph) {
+                locationParagraph
+            }
+
             //create an li to the ul
             const li = document.createElement("li")
-            li.innerHTML = `<a href= http://wttr.in/${city.toLowerCase()}?format=j1> ${updatedCity} - ${cityData.current_condition[0].FeelsLikeF}°F`
+            li.innerHTML = `<a href= http://wttr.in/${city.toLowerCase()}?format=j1> ${updatedCity}</a>- ${cityData.current_condition[0].FeelsLikeF}°F`
             document.querySelector("aside ul").append(li)
             form.reset()
 
@@ -49,12 +58,11 @@ form.addEventListener("submit", (event) => {
             `
             document.querySelector(".dayAfterTomorrowsWeather").innerHTML = `
             <h2> Day After Tomorrow </h2>
-            <b> Average Temperature: </b> ${cityData.weather[1].avgtempF}°F <br>
-            <b> Min Temperature: </b> ${cityData.weather[1].mintempF}°F <br>
-            <b> Max Temperature: </b> ${cityData.weather[1].mintempF}°F <br>
+            <b> Average Temperature: </b> ${cityData.weather[2].avgtempF}°F <br>
+            <b> Min Temperature: </b> ${cityData.weather[2].mintempF}°F <br>
+            <b> Max Temperature: </b> ${cityData.weather[2].mintempF}°F <br>
             `
             form.reset()
-
         })
 })
 
