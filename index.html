@@ -16,17 +16,30 @@
         <section id="header">
             <h1>Weather App</h1>
             <form class="location">
-                <label for="location">Pick A Location</label>
+                <label for="location"><b>Pick A Location</b></label>
                 <input type="text" id="userInput" name="userInput" />
                 <input type="submit" id="submitButton" name="submitButton" value="Get Weather" />
             </form>
         </section>
         <main class="display">
-            <p></p>
+            <article class="mainDisplay">
+                <span>Choose a location to view the weather. </span>
+                <p></p>
+            </article>
         </main>
-        <aside class="history">Previous Searches
-            <p class="NoSearchesMade">No Searches Made</p>
+        <div class="details">
+            <section class="todaysWeather">
+            </section>
+            <section class="tomorrowsWeather">
+            </section>
+            <section class="dayAfterTomorrowsWeather">
+            </section>
+        </div>
+
+        <aside class="history">
+            <h2>Previous Searches </h2>
             <ul>
+                <li class="noSearchesMade">No Searches Made</li>
             </ul>
         </aside>
     </div>
