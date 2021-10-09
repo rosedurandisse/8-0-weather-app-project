@@ -7,23 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Add script tag for CSS and JS Files-->
     <script defer src="./index.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles.css">
     <title>Weather App</title>
 </head>
 
 <body>
-    <main class="display">
+    <div>
         <section id="header">
             <h1>Weather App</h1>
-            <label for="location">Pick A Location</label>
             <form class="location">
-                <input type="text" id="location" name="location" />
+                <label for="location">Pick A Location</label>
+                <input type="text" id="userInput" name="userInput" />
                 <input type="submit" id="submitButton" name="submitButton" value="Get Weather" />
             </form>
-    </main>
-    <aside class="history">
-        <p>Previous Searches</p>
-    </aside>
+        </section>
+        <main class="display">
+            <p></p>
+        </main>
+        <aside class="history">Previous Searches
+            <p class="NoSearchesMade">No Searches Made</p>
+            <ul>
+            </ul>
+        </aside>
+    </div>
 </body>
 
 </html>
