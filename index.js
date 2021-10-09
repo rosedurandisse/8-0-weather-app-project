@@ -28,13 +28,33 @@ form.addEventListener("submit", (event) => {
             if (initialBullet) {
                 initialBullet.remove()
             }
-
             //create an li to the ul
             const li = document.createElement("li")
             li.innerHTML = `<a href= http://wttr.in/${city.toLowerCase()}?format=j1> ${updatedCity} - ${cityData.current_condition[0].FeelsLikeF}°F`
             document.querySelector("aside ul").append(li)
-
             form.reset()
+
+            document.querySelector(".todaysWeather").innerHTML = `
+            <h2> Today </h2>
+            <b> Average Temperature: </b> ${cityData.weather[0].avgtempF}°F <br>
+            <b> Min Temperature: </b> ${cityData.weather[0].mintempF}°F <br>
+            <b> Max Temperature: </b> ${cityData.weather[0].mintempF}°F <br>
+            `
+
+            document.querySelector(".tomorrowsWeather").innerHTML = `
+            <h2> Tomorrow </h2>
+            <b> Average Temperature: </b> ${cityData.weather[1].avgtempF}°F <br>
+            <b> Min Temperature: </b> ${cityData.weather[1].mintempF}°F <br>
+            <b> Max Temperature: </b> ${cityData.weather[1].mintempF}°F <br>
+            `
+            document.querySelector(".dayAfterTomorrowsWeather").innerHTML = `
+            <h2> Day After Tomorrow </h2>
+            <b> Average Temperature: </b> ${cityData.weather[1].avgtempF}°F <br>
+            <b> Min Temperature: </b> ${cityData.weather[1].mintempF}°F <br>
+            <b> Max Temperature: </b> ${cityData.weather[1].mintempF}°F <br>
+            `
+            form.reset()
+
         })
 })
 
