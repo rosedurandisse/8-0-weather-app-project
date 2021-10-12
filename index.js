@@ -13,56 +13,76 @@ const form = document.querySelector("form");
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
-    const city = input.value
-    fetch(`http://wttr.in/${city.toLowerCase()}?format=j1`)
+    const city = input.value //event.target.userInput.value;- same value
+    fetch(`https://wttr.in/${city}?format=j1`)
         .then((response) => response.json())
         .then((cityData) => {
-            const updatedCity = city[0].toUpperCase() + city.slice(1).toLowerCase()
-            document.querySelector(".display p").innerHTML = `
-            <h2> ${updatedCity} </h2> <br>
-            <b> Area: </b> ${cityData.nearest_area[0].areaName[0].value} <br>
-            <b> Region: </b> ${cityData.nearest_area[0].region[0].value} <br>
-            <b> Country: </b> ${cityData.nearest_area[0].country[0].value}<br>
-            <b> Currently: </b> ${cityData.current_condition[0].FeelsLikeF}°F`;
+            const updatedCity = city[0].toUpperCase() + city.slice(1).toLowerCase();
+            document.querySelector(".display").innerHTML = `
+                <p> <b> ${updatedCity} </b> </p>
+                <p> <b> Area: </b> ${cityData.nearest_area[0].areaName[0].value} </p>
+                <p> <b> Region: </b> ${cityData.nearest_area[0].region[0].value} </p>
+                <p> <b> Country: </b> ${cityData.nearest_area[0].country[0].value} </p>
+                <p> <b> Currently: </b> ${cityData.current_condition[0].FeelsLikeF}°F </p>`;
 
-            //remove the first bullet
+            // remove the first bullet
             const initialBullet = document.querySelector(".noSearchesMade");
             if (initialBullet) {
                 initialBullet.remove()
             }
 
-            //remove the location
+            //remove the location paragraph
             const locationParagraph = document.querySelector("main span");
             if (locationParagraph) {
-                locationParagraph
+                locationParagraph.remove()
             }
 
             //create an li to the ul
             const li = document.createElement("li")
-            li.innerHTML = `<a href= http://wttr.in/${city.toLowerCase()}?format=j1> ${updatedCity}</a>- ${cityData.current_condition[0].FeelsLikeF}°F`
+            li.innerHTML = `<a href=#> ${updatedCity}</a>- ${cityData.current_condition[0].FeelsLikeF}°F`
+            li.addEventListener("click", (event) => {
+                event.preventDefault();
+                fetch(`https://wttr.in/${city}?format=j1`)
+                    .then((response) => response.json())
+                    .then((cityData) => {
+                        const updatedCity = city[0].toUpperCase() + city.slice(1).toLowerCase();
+                        document.querySelector(".display").innerHTML = `
+                        <p> ${updatedCity} </p>
+                        <p> <b> Area: </b> ${cityData.nearest_area[0].areaName[0].value} </p>
+                        <p> <b> Region: </b> ${cityData.nearest_area[0].region[0].value} </p>
+                        <p> <b> Country: </b> ${cityData.nearest_area[0].country[0].value} </p>
+                        <p> <b> Currently: </b> ${cityData.current_condition[0].FeelsLikeF}°F </p>`;
+
+                        let article = document.querySelectorAll(".details div")
+                        let daysArray = ["Today", "Tomorrow", "Day After Tomorrow"]
+                        for (let i = 0; i < article.length; i++) {
+                            article[i].innerHTML = `<p><b>${daysArray[i]} </b> </p>
+                            <p> <b> Average Temperature: </b> ${cityData.weather[i].avgtempF}°F </p>
+                        <p> <b> Min Temperature: </b> ${cityData.weather[i].mintempF}°F </p>
+                        <p> <b> Max Temperature: </b> ${cityData.weather[i].maxtempF}°F </p>
+                        `
+                        }
+
+
+                    })
+            })
+
+
             document.querySelector("aside ul").append(li)
             form.reset()
 
-            document.querySelector(".todaysWeather").innerHTML = `
-            <h2> Today </h2>
-            <b> Average Temperature: </b> ${cityData.weather[0].avgtempF}°F <br>
-            <b> Min Temperature: </b> ${cityData.weather[0].mintempF}°F <br>
-            <b> Max Temperature: </b> ${cityData.weather[0].mintempF}°F <br>
+            //loop through all the divs, update their html since they pull the same information
+            let article = document.querySelectorAll(".details div")
+            let daysArray = ["Today", "Tomorrow", "Day After Tomorrow"]
+            for (let i = 0; i < article.length; i++) {
+                article[i].innerHTML = `<p><b>${daysArray[i]} </b> </p>
+                <p> <b> Average Temperature: </b> ${cityData.weather[i].avgtempF}°F </p>
+            <p> <b> Min Temperature: </b> ${cityData.weather[i].mintempF}°F </p>
+            <p> <b> Max Temperature: </b> ${cityData.weather[i].maxtempF}°F </p>
             `
+            }
 
-            document.querySelector(".tomorrowsWeather").innerHTML = `
-            <h2> Tomorrow </h2>
-            <b> Average Temperature: </b> ${cityData.weather[1].avgtempF}°F <br>
-            <b> Min Temperature: </b> ${cityData.weather[1].mintempF}°F <br>
-            <b> Max Temperature: </b> ${cityData.weather[1].mintempF}°F <br>
-            `
-            document.querySelector(".dayAfterTomorrowsWeather").innerHTML = `
-            <h2> Day After Tomorrow </h2>
-            <b> Average Temperature: </b> ${cityData.weather[2].avgtempF}°F <br>
-            <b> Min Temperature: </b> ${cityData.weather[2].mintempF}°F <br>
-            <b> Max Temperature: </b> ${cityData.weather[2].mintempF}°F <br>
-            `
             form.reset()
-        })
+        }).catch(console.log)
 })
 
