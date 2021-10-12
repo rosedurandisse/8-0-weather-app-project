@@ -26,8 +26,7 @@ h1{
 main {
     text-align: center;   
     grid-column: 2/6;
-    margin-top: 7px;
-    margin-right: 7px;
+    margin: 7px 7px 0px 7px;
     grid-row: 2;
     max-height: 100%;
     background-color: #EFEFEF;
@@ -36,13 +35,13 @@ main {
 
 article{
     display: grid;
-    grid-column: 2/7;
+    grid-column: 2/6;
     grid-template-columns: 2fr 2fr 2fr;
     grid-row: 3;
     text-align: center;
+    font-size: small;
 
 }
-
 
 
 
