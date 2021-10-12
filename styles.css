@@ -19,13 +19,13 @@ h1{
     border: 3px solid black;
     background-color: #258080;
     text-align: center;
-    grid-column: 2/6;
+    grid-column: 2/8;
     color: white;
 }
 
 main {
     text-align: center;   
-    grid-column: 2/5;
+    grid-column: 2/6;
     margin-top: 7px;
     margin-right: 7px;
     grid-row: 2;
@@ -34,23 +34,26 @@ main {
     border: 2px solid #72B1B2
 }
 
-.details {
+article{
+    display: grid;
+    grid-column: 2/7;
+    grid-template-columns: 2fr 2fr 2fr;
     grid-row: 3;
-    grid-column: 2/5;
     text-align: center;
+
 }
 
-section {
-    display: inline-block;
-    text-align: center;
-}
+
 
 
 
 aside { 
-    grid-column: 5/6;
+    grid-column: 6/8;
     margin-top: 7px;
-    overflow: hidden;
+    overflow: scroll;
+    height: 200px;
+    font-size: small; 
+    
 }
 
 .noSearchesMade {
