@@ -53,7 +53,7 @@ form.addEventListener("submit", (event) => {
                         <p> <b> Country: </b> ${cityData.nearest_area[0].country[0].value} </p>
                         <p> <b> Currently: </b> ${cityData.current_condition[0].FeelsLikeF}°F </p>`;
 
-                        let article = document.querySelectorAll(".details div")
+                        let article = document.querySelectorAll(".details section")
                         let daysArray = ["Today", "Tomorrow", "Day After Tomorrow"]
                         for (let i = 0; i < article.length; i++) {
                             article[i].innerHTML = `<p><b>${daysArray[i]} </b> </p>
@@ -72,7 +72,7 @@ form.addEventListener("submit", (event) => {
             form.reset()
 
             //loop through all the divs, update their html since they pull the same information
-            let article = document.querySelectorAll(".details div")
+            let article = document.querySelectorAll(".details section")
             let daysArray = ["Today", "Tomorrow", "Day After Tomorrow"]
             for (let i = 0; i < article.length; i++) {
                 article[i].innerHTML = `<p><b>${daysArray[i]} </b> </p>
